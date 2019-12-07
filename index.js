@@ -11,7 +11,7 @@ const renderGoodsItem = (title, price) => {
 
 const renderGoodsList = (list) => {
     const goodsList = list.map(item => renderGoodsItem(item.title, item.price));
-    document.querySelector('.goods-list').innerHTML = goodsList;
+    document.querySelector('.goods-list').innerHTML = goodsList.join('');
 };
 
 renderGoodsList(goods);
