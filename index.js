@@ -27,9 +27,16 @@ class GoodsList {
           listHtml += goodItem.render();
         });
         document.querySelector('.goods-list').innerHTML = listHtml;
-    }    
+    }
+    sumItems() {
+        let summa = 0;
+        this.goods.forEach(good => {summa += good.price});
+        return summa;
+    }     
 }
 
 const list = new GoodsList();
+
 list.fetchGoods();
 list.render();
+list.sumItems();
