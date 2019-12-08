@@ -4,7 +4,7 @@ class GoodsItem {
       this.price = price;
     }
     render() {
-      return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p></div>`;
+      return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p><button class="basket">Купить</button></div>`;
     }
 }
 
@@ -33,6 +33,24 @@ class GoodsList {
         this.goods.forEach(good => {summa += good.price});
         return summa;
     }     
+}
+
+class basket {
+    addBasket() {
+        //Метод добавляет в корзину товар.
+    }
+    removeBasket() {
+        //Метод удаляет товар из корзины.
+    }
+}
+
+class basketItems {
+    allItemsBasket() {
+        //Метод отображает все товары в корзине.
+    }
+    sumItemsBasket () {
+        //Метод считает сумму товаров в корзине.
+    }
 }
 
 const list = new GoodsList();
