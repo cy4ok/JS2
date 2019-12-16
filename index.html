@@ -6,15 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>eShop</title>
+    <link rel="stylesheet" href="widgets/chat/style.css"
     <link rel="stylesheet" href="reset.css">
+    <style>
+        .header{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            border: 1px solid rgb(208, 209, 211);
+            margin: 0 0 20px -40px;
+        }
+        .cart-button {
+            border: none;
+            border-radius: 3px;
+            background-color: bisque;
+        }
+        .goods-list{
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .goods-item{
+            padding: 20px;
+            margin-left: 20px;
+            width: calc(100% / 5 - 100px);
+            background-color: rgb(208, 209, 211);
+        }
+        .basket{
+            border-radius: 2px;
+            background-color: rgba(153, 169, 199, 0.932);
+            color: black;
+        }
+    </style>
 </head>
 <body>
-<header>
+<header class="header">
     <button class="cart-button">Корзина</button>
 </header>
 <main>
     <div class="goods-list"></div>
 </main>
+<script src="widgets/chat/main.js"></script>
 <script src="index.js"></script>
 </body>
 </html>
