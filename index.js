@@ -11,13 +11,12 @@ function makeGETRequest(url) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const body = JSON.parse(xhr.responseText);
-                callback(body)
             }
         };
         xhr.open('GET', url);
         xhr.send();
 });
-
+};
 class GoodsItem {
     constructor(title = 'Без имени', price = '') {
         this.title = title;
