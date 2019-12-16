@@ -1,66 +1,58 @@
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
-function makeGetRequest(url) {
-  return new Promise((resolve, reject) => {
-        let xhr;
-        if (XMLHttpRequest) {
-            xhr = new XMLHttpRequest();
-        } else {
-            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+function makeGETRequest(url, callback) {
+    let xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new window.XMLHttpRequest();
+    } else {
+        xhr = new window.ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const body = JSON.parse(xhr.responseText);
+            callback(body)
         }
-
-        xhr.onreadystatechange = function() {            
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const body = JSON.parse(xhr.responseText);
-                resolve(body);
-            } else if (xhr.readyState === 4 && xhr.status !== 200) {
-                reject({
-                    error: xhr.status,
-                });
-            }
-        };
-
-        xhr.open('GET', url);
-        xhr.send();
-    });
+    };
+    xhr.open('GET', url);
+    xhr.send();
 }
-
-makeGetRequest('https://jsonplaceholder.typicode.com/todos/1')
-    .then(res => console.log(res))
-    .catch(err => console.error(err));
 
 class GoodsItem {
     constructor(title = 'Без имени', price = '') {
-      this.title = title;
-      this.price = price;
+        this.title = title;
+        this.price = price;
     }
     render() {
-      return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p><button class="basket">Купить</button></div>`;
+        return `<div class="goods-item">
+                    <h3 class="title goods-title">${this.title}</h3>
+                    <p>${this.price} ₽</p>
+                </div>`;
     }
 }
 
 class GoodsList {
     constructor() {
-      this.goods = [];
+        this.goods = [];
     }
-    fetchGoods(cb) {
-    makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
+    fetchGoods(cb)  {
+        makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
             this.goods = goods;
             cb();
         });
     }
-    render() {
-        let listHtml = '';
-        this.goods.forEach(good => {
-          const goodItem = new GoodsItem(good.product_name, good.price);
-          listHtml += goodItem.render();
-        });
-        document.querySelector('.goods-list').innerHTML = listHtml;
-    }
-    sumItems() {
+        sumItem() {
         let summa = 0;
         this.goods.forEach(good => {summa += good.price});
         return summa;
     }     
+    render() {
+        let listHtml = '';
+        this.goods.forEach(good => {
+            const goodItem = new GoodsItem(good.product_name, good.price);
+            listHtml += goodItem.render();
+        });
+        document.querySelector('.goods-list').innerHTML = listHtml;
+    }
 }
 
 class Cart extends GoodsList {
