@@ -11,8 +11,13 @@ function makeGETRequest(url) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const body = JSON.parse(xhr.responseText);
+                resolve(body);
             }
         };
+        xhr.onerror = function(err) {
+            reject(err);
+        }
+        
         xhr.open('GET', url);
         xhr.send();
 });
@@ -35,8 +40,8 @@ class GoodsList {
         this.goods = [];
     }
     fetchGoods() {
-        makeGETRequest(`${API_URL}/catalogData.json`).then((goods) => {
-           return this.goods = goods;
+        return makeGETRequest(`${API_URL}/catalogData.json`).then((goods) => {
+           this.goods = goods;
         });
     }
     sumItem() {
@@ -71,6 +76,6 @@ class CartItem extends GoodsItem {
 }
 
 const list = new GoodsList();
-list.fetchGoods(() => {
+list.fetchGoods().then(() => {
     list.render();
 });
