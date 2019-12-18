@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+
 <body>
     <script>
+        const replacer = (word) => word.substring(0, 1) + "'" + word.substring(2, 3)
         let textUser = prompt('Введите текст.');
-        const regexp = /'/g;
+        const regexp = /'/gmi;
+        const regexp2 = /\w"\w/gmi;
         textUser = textUser.replace(regexp, '"');
+        textUser = textUser.replace(regexp2, replacer);
         alert(textUser);
     </script>
 </body>
+
 </html>
