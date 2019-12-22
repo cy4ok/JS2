@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-class GoodsItem {
-    constructor(title, price) {
-      this.title = title;
-      this.price = price;
-    }
-    render() {
-      return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p><button class="basket">Купить</button></div>`;
-    }
-}
-
-class GoodsList {
-    constructor() {
-      this.goods = [];
-    }
-    fetchGoods() {
-      this.goods = [
-        { title: 'Shirt', price: 150 },
-        { title: 'Socks', price: 50 },
-        { title: 'Jacket', price: 350 },
-        { title: 'Shoes', price: 250 },
-      ];
-=======
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
 function makeGETRequest(url) {
@@ -72,12 +49,10 @@ class GoodsList {
             summa += good.price
         });
         return summa;
->>>>>>> Lesson_4
     }
     render() {
         let listHtml = '';
         this.goods.forEach(good => {
-<<<<<<< HEAD
           const goodItem = new GoodsItem(good.title, good.price);
           listHtml += goodItem.render();
         });
@@ -99,27 +74,6 @@ class basket {
     }
 }
 
-class basketItems {
-    allItemsBasket() {
-        //Метод отображает все товары в корзине.
-    }
-    sumItemsBasket () {
-        //Метод считает сумму товаров в корзине.
-    }
-}
-
-const list = new GoodsList();
-
-list.fetchGoods();
-list.render();
-list.sumItems();
-=======
-            const goodItem = new GoodsItem(good.product_name, good.price);
-            listHtml += goodItem.render();
-        });
-        document.querySelector('.goods-list').innerHTML = listHtml;
-    }
-}
 class Cart extends GoodsList {
     constructor(props) {
         super(props);
@@ -138,4 +92,3 @@ const list = new GoodsList();
 list.fetchGoods().then(() => {
     list.render();
 });
->>>>>>> Lesson_4
