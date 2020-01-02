@@ -82,8 +82,8 @@
                     <input type="text" class="search-input" v-model="searchLine" />
                     <button class="search-button">Искать</button>
                 </form>
-                <button class="cart-button">Корзина</button>
-                <div class="cart-container"></div>
+                <button class="cart-button" @click="getVisibleCart">Корзина</button>
+                <div class="cart-container" v-if="isVisibleCart"></div>
             </div>
         </header>
         <main>

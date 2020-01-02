@@ -2,9 +2,10 @@ const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-sto
 const app = new Vue({
     el: '#app'
     , data: {
-        goods: []
-        , filteredGoods: []
-        , searchLine: ''
+        goods: [] ,
+        filteredGoods: [] ,
+        searchLine: '' ,
+        isVisibleCart: false ,
     }
     , methods: {
         makeGETRequest(url) {
@@ -33,11 +34,14 @@ const app = new Vue({
                     xhr.open('GET', url);
                     xhr.send();
                 });
-            }
-            , filterGoods() {
+            },
+        filterGoods() {
                 const regexp = new RegExp(this.searchLine, 'i');
                 this.filteredGoods = this.goods.filter((good) => regexp.test(good.product_name));
-            }
+            },
+        getVisibleCart() {
+            this.isVisibleCart = !this.isVisibleCart;
+        },
     }
     , async mounted() {
         try {
