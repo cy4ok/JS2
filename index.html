@@ -1,51 +1,103 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>eShop</title>
     <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="widgets/chat/style.css">
     <style>
-        .header{
-            width: 100%;
+        .header {
+            padding: 10px 20px;
+            border-bottom: 1px solid #c0c0c0;
+            margin-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            padding: 0 20px;
             display: flex;
-            justify-content: flex-end;
-            padding: 10px;
-            border: 1px solid rgb(208, 209, 211);
-            margin: 0 0 20px 0;
-        }
-        .cart-button {
-            border: none;
-            border-radius: 3px;
-            background-color: bisque;
-        }
-        .goods-list{
             margin: 0 auto;
+        }
+        
+        .header .container {
+            position: relative;
+        }
+        
+        .cart-button {
+            -webkit-appearance: none;
+            border: none;
+            background-color: #46a5fc;
+            color: #fff;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-left: auto;
+        }
+        
+        .goods-list {
             display: flex;
             flex-wrap: wrap;
+            max-width: 1280px;
+            margin: 0 auto;
         }
-        .goods-item{
+        
+        .goods-item {
             padding: 20px;
             margin-left: 20px;
-            width: calc(100% / 5 - 100px);
-            background-color: rgb(208, 209, 211);
+            margin-bottom: 20px;
+            width: calc(100% / 3 - 60px);
+            background-color: #f1f1f1;
         }
-        .basket{
-            border-radius: 2px;
-            background-color: rgba(153, 169, 199, 0.932);
-            color: black;
+        
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .goods-title {
+            margin-bottom: 20px;
+        }
+        
+        .cart-container {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 15px);
+            width: 220px;
+            height: 100px;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
+
 <body>
-<header class="header">
-    <button class="cart-button">Корзина</button>
-</header>
-<main>
-    <div class="goods-list"></div>
-</main>
-<script src="index.js"></script>
+    <div id="app">
+        <header class="header">
+            <div class="container">
+                <form class="search-form" @submit.prevent="filterGoods">
+                    <input type="text" class="search-input" v-model="searchLine" />
+                    <button class="search-button">Искать</button>
+                </form>
+                <button class="cart-button" @click="getVisibleCart">Корзина</button>
+                <div class="cart-container" v-if="isVisibleCart"></div>
+            </div>
+        </header>
+        <main>
+            <div class="goods-list">
+                <div class="goods-item" v-for="good in filteredGoods" :key="good.id_product">
+                    <h3>{{ good.product_name }}</h3>
+                    <p>{{ good.price }}</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="index.js"></script>
+    <script src="widgets/chat/main.js"></script>
 </body>
+
 </html>
